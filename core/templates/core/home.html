@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Sentiment Analysis</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{% static 'core/images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'core/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'core/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'core/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'core/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'core/vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'core/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'core/css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+<body>
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form" method="post">
+				{% csrf_token %}
+				<span class="contact100-form-title">
+					Howdy there!
+				</span>
+
+				<div class="wrap-input100 validate-input" data-validate = "Tweet is required">
+					<textarea class="input200" name="tweet" placeholder="Your tweet goes here..."></textarea>
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="container-contact100-form-btn">
+					<div class="wrap-contact100-form-btn">
+						<div class="contact100-form-bgbtn"></div>
+						<button class="contact100-form-btn">
+							<span>
+								Analyse
+								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+							</span>
+						</button>
+					</div>
+				</div>
+			</form>
+			{% if tweet %}
+			<div class="wrap-output100">
+					<p class="input100">Your Tweet</p>
+					<p class="input200">{{ tweet }}</p>
+			</div>
+			{% endif %}
+			{% if tweet %}
+			<div class="wrap-output200">
+					<p class="input100">Sentiment</p>
+					<p class="input200">{{ sentiment }}</p>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+
+<!--===============================================================================================-->
+	<script src="{% static 'core/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'core/vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'core/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'core/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'core/js/main.js' %}"></script>
+<!--===============================================================================================-->
+
+</body>
+</html>
