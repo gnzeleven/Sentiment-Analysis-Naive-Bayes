@@ -13,7 +13,6 @@ def home_view(request):
         if form.is_valid():
             # process the data in form.cleaned_data as required
             tweet = form.cleaned_data['tweet']
-            print(tweet)
             p = naive_bayes_predict(tweet)
             if p >= 0.5:
                 sentiment = "Positive"
@@ -21,8 +20,6 @@ def home_view(request):
                 sentiment = "Negative"
             else:
                 sentiment = "Neutral"
-            print("score: ", p)
-            print("sentiment: ", sentiment)
             # redirect to a new URL:
             form = GetTweetForm()
             return render(request, 'core/home.html', {'form': form, 'tweet': tweet, 'sentiment': sentiment})
@@ -32,6 +29,3 @@ def home_view(request):
         form = GetTweetForm()
 
     return render(request, 'core/home.html', {'form': form})
-
-def index_view(request):
-    return render(request, 'core/index.html')
