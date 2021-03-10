@@ -1,4 +1,5 @@
 import numpy as np
+from sklearn.metrics import roc_curve
 from .utils import *
 
 def naive_bayes_train(freq_dict, n_tweets, n_pos):
@@ -69,6 +70,7 @@ def naive_bayes_test(test_tweets, test_labels, logprior, loglikelihood):
     :param test_labels: corresponding test labels
     :param logprior: logprior computed through naive_bayes_train
     :param loglikelihood: loglikelihood dictionary - consisting of loglikelihood for each word
+    :return pred_labels: predicted label for each of the test example
     :return error: test error
     :return accuracy: test accuracy
     """
@@ -87,7 +89,7 @@ def naive_bayes_test(test_tweets, test_labels, logprior, loglikelihood):
     error = (pred_labels != test_labels).sum() / len(test_labels)
     # Compute the accuracy
     accuracy = 1 - error
-    return error, accuracy
+    return pred_labels, error, accuracy
 
 if __name__ == '__main__':
     # Path to positive json and negative json
@@ -108,5 +110,9 @@ if __name__ == '__main__':
     # Save the logprior and loglikelihood as json
     write_model_json(logprior, loglikelihood)
     # Run test
-    error, accuracy = naive_bayes_test(test_tweets, test_labels, logprior, loglikelihood)
+    pred_labels, error, accuracy = naive_bayes_test(test_tweets, test_labels, logprior, loglikelihood)
+    # Compute fpr and tpr
+    fpr, tpr, _ = roc_curve(test_labels, pred_labels)
+    # Plot the roc curve
+    plot_roc_curve(fpr, tpr)
     print("Test error: {}\nTest accuracy: {}".format(error, accuracy))

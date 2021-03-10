@@ -4,6 +4,7 @@ import json
 import string
 import re
 import numpy as np
+import matplotlib.pyplot as plt
 from nltk.tokenize import TweetTokenizer
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
@@ -138,7 +139,10 @@ def write_model_json(logprior, loglikelihood):
         "logprior": logprior,
         "loglikelihood": loglikelihood
     }
-    path = os.path.join(APP_NAME, PACKAGE_NAME, 'model')
+    if os.getcwd().split('\\')[-1] == "naivebayes":
+        path = 'model'
+    else:
+        path = os.path.join(APP_NAME, PACKAGE_NAME, 'model')
     with open(os.path.join(path, "model.json"), "w") as out_file:
         json.dump(d, out_file)
 
@@ -150,10 +154,29 @@ def read_model_json():
     :return logprior: Pretrained logprior
     :return loglikelihood: Pretrained loglikelihood
     """
-    path = os.path.join(APP_NAME, PACKAGE_NAME, 'model')
+    if os.getcwd().split('\\')[-1] == "naivebayes":
+        path = 'model'
+    else:
+        path = os.path.join(APP_NAME, PACKAGE_NAME, 'model')
     with open(os.path.join(path, "model.json"), "r") as in_file:
         d = json.load(in_file)
     logprior = d['logprior']
     loglikelihood = d['loglikelihood']
 
     return logprior, loglikelihood
+
+
+def plot_roc_curve(fpr, tpr):
+    '''
+    Plots roc curve
+    :param fpr: False positive rate
+    :param tpr: True positive rate
+    :return: None
+    '''
+    plt.plot(fpr, tpr, color='blue', label='ROC')
+    plt.plot([0, 1], [0, 1], color='black', linestyle='--')
+    plt.xlabel('FPR')
+    plt.ylabel('TPR')
+    plt.title('ROC Curve')
+    plt.legend()
+    plt.show()
