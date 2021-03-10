@@ -46,7 +46,7 @@ python naive_bayes_sentiment.py
 <img src='./images/negative_tweet.PNG' style='width: 200;' >
 
 *Test Accuracy*
-<img src='./images/score.PNG' style='width: 200;' >
+<img src='./images/score.jpg' style='width: 200;' >
 
 *ROC Curve*
 <img src='./images/roc_curve.jpg' style='width: 200;' >
