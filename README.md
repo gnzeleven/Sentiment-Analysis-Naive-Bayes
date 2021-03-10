@@ -39,16 +39,16 @@ python naive_bayes_sentiment.py
 
 
 ## Screenshots
-<center>Positive Example</center>
+*Positive Example*
 <img src='./images/positive_tweet.PNG' style='width: 200;' >
 
-<center>Negative Example</center>
+*Negative Example*
 <img src='./images/negative_tweet.PNG' style='width: 200;' >
 
-<center>Test Accuracy</center>
+*Test Accuracy*
 <img src='./images/score.PNG' style='width: 200;' >
 
-<center>Space</center>
+*ROC Curve*
 <img src='./images/roc_curve.jpg' style='width: 200;' >
 
 ## License
